@@ -1,4 +1,5 @@
-#! /bin/python
+#! _*_encoding:utf-8 _*_ 
+
 import os
 W = '\033[37m'
 R = '\033[1;31m'  # red
